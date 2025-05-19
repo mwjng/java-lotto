@@ -35,4 +35,9 @@ public class LottoGame {
         outputHandler.requestWinningNumbers();
         return inputHandler.getWinningNumbers();
     }
+
+    private int getBonusNumber() {
+        outputHandler.requestBonusNumber();
+        return inputHandler.getBonusNumber();
+    }
 }
