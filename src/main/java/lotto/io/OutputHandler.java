@@ -17,6 +17,11 @@ public class OutputHandler {
         }
     }
 
+    public void requestWinningNumbers() {
+        System.out.println();
+        System.out.println("당첨 번호를 입력해 주세요.");
+    }
+
     public void showErrorMessage(Exception e) {
         System.out.println("[ERROR] " + e.getMessage());
     }

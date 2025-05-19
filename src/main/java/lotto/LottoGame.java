@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.List;
 import lotto.io.InputHandler;
 import lotto.io.OutputHandler;
 import lotto.model.Lottos;
@@ -28,5 +29,10 @@ public class LottoGame {
     private Lottos purchaseLottos(Money lottoPurchaseAmount) {
         int lottoCount = (int) (lottoPurchaseAmount.getAmount() / 1000);
         return Lottos.createLottos(lottoCount);
+    }
+
+    private List<Integer> getWinningNumbers() {
+        outputHandler.requestWinningNumbers();
+        return inputHandler.getWinningNumbers();
     }
 }
