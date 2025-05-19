@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.List;
+import java.util.Optional;
 
 public class WinningLotto {
 
@@ -13,6 +14,29 @@ public class WinningLotto {
 
         validateBonusNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
+    }
+
+    public Optional<LottoRank> getMatchResult(Lotto lotto) {
+        List<Integer> numbers = lotto.getNumbers();
+        int matchCount = getMatchCount(numbers);
+
+        if (matchCount == 3) {
+            return Optional.of(LottoRank.FIFTH);
+        }
+        if (matchCount == 4) {
+            return Optional.of(LottoRank.FOURTH);
+        }
+        if (matchCount == 5) {
+            if (numbers.contains(this.bonusNumber)) {
+                return Optional.of(LottoRank.SECOND);
+            }
+            return Optional.of(LottoRank.THIRD);
+        }
+        if (matchCount == 6) {
+            return Optional.of(LottoRank.FIRST);
+        }
+
+        return Optional.empty();
     }
 
     private void validateWinNumbers(List<Integer> winNumbers) {

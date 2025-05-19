@@ -2,7 +2,10 @@ package lotto.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class Lottos {
 
@@ -20,6 +23,18 @@ public class Lottos {
             lottoList.add(new Lotto(numbers));
         }
         return new Lottos(lottoList);
+    }
+
+    public LottoResult getMatchResults(WinningLotto winningLotto) {
+        Map<LottoRank, Integer> rankCounts = new EnumMap<>(LottoRank.class);
+
+        for (Lotto lotto : lottos) {
+            Optional<LottoRank> matchResult = winningLotto.getMatchResult(lotto);
+            matchResult.ifPresent(
+                    rank -> rankCounts.put(rank, rankCounts.getOrDefault(rank, 0) + 1)
+            );
+        }
+        return new LottoResult(rankCounts);
     }
 
     public int getLottoCount() {

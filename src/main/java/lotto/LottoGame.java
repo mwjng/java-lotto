@@ -3,8 +3,10 @@ package lotto;
 import java.util.List;
 import lotto.io.InputHandler;
 import lotto.io.OutputHandler;
+import lotto.model.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.Money;
+import lotto.model.WinningLotto;
 
 public class LottoGame {
 
@@ -16,6 +18,8 @@ public class LottoGame {
             Money lottoPurchaseAmount = getLottoPurchaseAmount();
             Lottos lottos = purchaseLottos(lottoPurchaseAmount);
             outputHandler.showListPurchasedLotto(lottos);
+
+            LottoResult lottoResult = lottos.getMatchResults(getWinningLotto());
         } catch (IllegalArgumentException e) {
             outputHandler.showErrorMessage(e);
         }
@@ -29,6 +33,12 @@ public class LottoGame {
     private Lottos purchaseLottos(Money lottoPurchaseAmount) {
         int lottoCount = (int) (lottoPurchaseAmount.getAmount() / 1000);
         return Lottos.createLottos(lottoCount);
+    }
+
+    private WinningLotto getWinningLotto() {
+        List<Integer> winningNumbers = getWinningNumbers();
+        int bonusNumber = getBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 
     private List<Integer> getWinningNumbers() {
