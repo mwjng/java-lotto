@@ -20,6 +20,7 @@ public class LottoGame {
             outputHandler.showListPurchasedLotto(lottos);
 
             LottoResult lottoResult = lottos.getMatchResults(getWinningLotto());
+            outputHandler.showWinningStatus(lottoResult, lottoPurchaseAmount.getAmount());
         } catch (IllegalArgumentException e) {
             outputHandler.showErrorMessage(e);
         }
