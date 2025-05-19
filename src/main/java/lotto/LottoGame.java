@@ -14,6 +14,7 @@ public class LottoGame {
         try {
             Money lottoPurchaseAmount = getLottoPurchaseAmount();
             Lottos lottos = purchaseLottos(lottoPurchaseAmount);
+            outputHandler.showListPurchasedLotto(lottos);
         } catch (IllegalArgumentException e) {
             outputHandler.showErrorMessage(e);
         }
