@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.io.InputHandler;
 import lotto.io.OutputHandler;
+import lotto.model.Lottos;
 import lotto.model.Money;
 
 public class LottoGame {
@@ -12,6 +13,7 @@ public class LottoGame {
     public void run() {
         try {
             Money lottoPurchaseAmount = getLottoPurchaseAmount();
+            Lottos lottos = purchaseLottos(lottoPurchaseAmount);
         } catch (IllegalArgumentException e) {
             outputHandler.showErrorMessage(e);
         }
@@ -20,5 +22,10 @@ public class LottoGame {
     private Money getLottoPurchaseAmount() {
         outputHandler.requestLottoPurchaseAmount();
         return inputHandler.getLottoPurchaseAmount();
+    }
+
+    private Lottos purchaseLottos(Money lottoPurchaseAmount) {
+        int lottoCount = (int) (lottoPurchaseAmount.getAmount() / 1000);
+        return Lottos.createLottos(lottoCount);
     }
 }
